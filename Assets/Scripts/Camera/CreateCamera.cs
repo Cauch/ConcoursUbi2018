@@ -13,7 +13,7 @@ public class CreateCamera : NetworkBehaviour {
 		if(isLocalPlayer)
         {
             GameObject cam = GameObject.Instantiate(CameraToInstanciate);
-            cam.GetComponent<ThirdPerson>().SetPlayer(this.gameObject.transform);
+            cam.GetComponent<ThirdPersonFree>().SetPlayer(this.gameObject.transform);
 
             GetComponent<UpdateEcho>().Cam = cam.GetComponent<Camera>();
 
