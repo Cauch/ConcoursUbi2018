@@ -83,8 +83,7 @@ public class ObjectSync : NetworkBehaviour
         syncYRot = rot.eulerAngles.y;
         lastYRot = rot;
     }
-
-
+    
     [ClientRpc]
     public void Rpc_SetObjectActive(bool isActive)
     {

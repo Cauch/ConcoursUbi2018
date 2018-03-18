@@ -50,7 +50,7 @@ public class NetworkSpawner : NetworkBehaviour {
     [Server]
     public void ReturnToPool(GameObject go)
     {
-        go.GetComponent<ObjectSync>().Rpc_SetObjectActive(false);
+        go.GetComponent<ObjectSync>().  Rpc_SetObjectActive(false);
         availables.Enqueue(go);
     }
 }
