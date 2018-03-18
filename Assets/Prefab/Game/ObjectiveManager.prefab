@@ -20,7 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4179091888224260}
   - component: {fileID: 114800160248523938}
+<<<<<<< HEAD
   - component: {fileID: 114064912876660156}
+=======
+>>>>>>> Objectives
   m_Layer: 0
   m_Name: ObjectiveManager
   m_TagString: ObjectiveManager
@@ -41,6 +44,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!114 &114064912876660156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,6 +77,8 @@ MonoBehaviour:
     i15: 54
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+=======
+>>>>>>> Objectives
 --- !u!114 &114800160248523938
 MonoBehaviour:
   m_ObjectHideFlags: 1

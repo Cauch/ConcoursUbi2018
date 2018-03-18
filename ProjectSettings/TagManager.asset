@@ -13,6 +13,7 @@ TagManager:
   - Car
   - ObjectiveManager
   - ScoreManager
+  - ObjectiveManager
   layers:
   - Default
   - TransparentFX

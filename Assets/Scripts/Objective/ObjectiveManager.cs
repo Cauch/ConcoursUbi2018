@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Networking;
 using System.ComponentModel;
 using System.Linq;
@@ -33,6 +32,7 @@ public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
         GameEssentials.ObjectiveManager = this;
         PropertyChanged = delegate { };
         CurrentObjectives = new SyncListObjectives();
+
         Objectives = new List<Objective> {
             new Objective
             {
