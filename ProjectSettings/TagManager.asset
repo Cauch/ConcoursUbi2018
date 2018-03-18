@@ -12,6 +12,7 @@ TagManager:
   - PickableObject
   - Car
   - ObjectiveManager
+  - ScoreManager
   layers:
   - Default
   - TransparentFX
