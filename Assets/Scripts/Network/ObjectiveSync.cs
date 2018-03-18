@@ -8,6 +8,7 @@ public class ObjectiveSync : NetworkBehaviour
     public enum Instruction { ADD, FAIL, COMPLETE }
 
     private ObjectiveManager _objectiveManager;
+
     void Awake()
     {
         GameEssentials.ObjectiveSync = this;

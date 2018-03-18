@@ -9,13 +9,8 @@ public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
 {
     public List<Objective> Objectives;
     private SyncListObjectives _currentObjectives;
-    public SyncListObjectives CurrentObjectives
-    {
-        get { return _currentObjectives; }
-        set { _currentObjectives = value; PropertyChanged(this, new PropertyChangedEventArgs("CurrentObjectives")); }
-    }
+    public SyncListObjectives CurrentObjectives;
 
-    public class SyncListObjectives : SyncListStruct<Objective> { };
     public event PropertyChangedEventHandler PropertyChanged;
 
     private void NotifyPropertyChanged(string propertyName)
@@ -32,7 +27,6 @@ public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
         GameEssentials.ObjectiveManager = this;
         PropertyChanged = delegate { };
         CurrentObjectives = new SyncListObjectives();
-
         Objectives = new List<Objective> {
             new Objective
             {
@@ -61,12 +55,13 @@ public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
         };
     }
 
-    public void Add(Objective objective)
+    public void Add(Objective objective, bool SendServer = true )
     {
         if (!IsCurrentObjective(objective) && objective.Status == ObjectiveStateEnum.BACKLOG)
         {
             objective.Status = ObjectiveStateEnum.PROGRESS;
             CurrentObjectives.Add(objective);
+            PropertyChanged(this, new PropertyChangedEventArgs("Add"));
         }
     }
 
@@ -83,6 +78,7 @@ public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
         if (IsCurrentObjective(objective))
         {
             RemoveObjective(objective);
+            PropertyChanged(this, new PropertyChangedEventArgs("Complete"));
             return objective.Succeed();
         }
         return 0;
@@ -93,6 +89,8 @@ public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
         if (IsCurrentObjective(objective))
         {
             RemoveObjective(objective);
+            PropertyChanged(this, new PropertyChangedEventArgs("Fail"));
+
             return objective.Fail();
         }
         return 0;
@@ -102,7 +100,6 @@ public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
     {
         return CurrentObjectives.Where(obj => obj == objective).Any();
     }
-
 
     [ClientRpc]
     public void Rpc_AddObjectiveToServer(Objective objective)
@@ -121,4 +118,5 @@ public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
     {
         Fail(objective);
     }
+
 }
