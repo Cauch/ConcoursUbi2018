@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Networking;
 
-public class ObjectiveTrigger : MonoBehaviour {
+public class ObjectiveTrigger : NetworkBehaviour {
     public int ObjectiveId;
     public Objective Objective;
     public ObjectiveStateEnum Status;
@@ -11,29 +12,31 @@ public class ObjectiveTrigger : MonoBehaviour {
 
     private void Start()
     {
-        _objectiveManager = GameObject.FindGameObjectWithTag(ConstantsHelper.ObjectiveManagerTag).GetComponent<ObjectiveManager>();
+        _objectiveManager = GameEssentials.ObjectiveManager;
         Objective = _objectiveManager.Objectives.Where(obj => obj.Id == ObjectiveId).First();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (Status)
+        NetworkBehaviour networkBehaviour = other.GetComponentInParent<NetworkBehaviour>();
+        if (networkBehaviour && other.gameObject.GetComponent<TriggerFeet>() && networkBehaviour.isLocalPlayer)
         {
-            case ObjectiveStateEnum.FAIL:
-                _objectiveManager.Fail(Objective);
-        
-                break;
-            case ObjectiveStateEnum.SUCCESS:
-                _objectiveManager.Complete(Objective);
-        
-                break;
-            case ObjectiveStateEnum.PROGRESS:
-                _objectiveManager.Add(Objective);
-        
-                break;
-            default:
-                break;
+            switch (Status)
+            {
+                case ObjectiveStateEnum.FAIL:
+                    GameEssentials.ObjectiveSync.Cmd_FailObjectiveToServer(Objective);
+
+                    break;
+                case ObjectiveStateEnum.SUCCESS:
+                    GameEssentials.ObjectiveSync.Cmd_CompleteObjectiveToServer(Objective);
+                    break;
+                case ObjectiveStateEnum.PROGRESS:
+                    GameEssentials.ObjectiveSync.Cmd_AddObjectiveToServer(Objective);
+
+                    break;
+                default:
+                    break;
+            }
         }
-        
     }
 }

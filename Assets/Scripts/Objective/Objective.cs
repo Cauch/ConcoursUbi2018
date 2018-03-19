@@ -31,4 +31,27 @@ public struct Objective {
 
         return 0;
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        var objectToCompareWith = (Objective)obj;
+
+        return objectToCompareWith.Id == Id;
+
+    }
+
+    public static bool operator ==(Objective o1, Objective o2)
+    {
+        return o1.Equals(o2);
+    }
+
+    public static bool operator !=(Objective o1, Objective o2)
+    {
+        return !o1.Equals(o2);
+    }
 }

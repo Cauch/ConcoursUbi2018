@@ -1,18 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using UnityEngine.Networking;
+using System.ComponentModel;
+using System.Linq;
 
-public class ObjectiveManager : MonoBehaviour
+public class SyncListObjectives : SyncListStruct<Objective> { };
+
+public class ObjectiveManager : NetworkBehaviour, INotifyPropertyChanged
 {
     public List<Objective> Objectives;
-    public List<Objective> CurrentObjectives;
+    private SyncListObjectives _currentObjectives;
+    public SyncListObjectives CurrentObjectives
+    {
+        get { return _currentObjectives; }
+        set { _currentObjectives = value; PropertyChanged(this, new PropertyChangedEventArgs("CurrentObjectives")); }
+    }
+
+    public class SyncListObjectives : SyncListStruct<Objective> { };
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    private void NotifyPropertyChanged(string propertyName)
+    {
+        if (PropertyChanged != null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 
     // Use this for initialization
     void Awake()
     {
-        CurrentObjectives = new List<Objective>();
+        GameEssentials.ObjectiveManager = this;
+        PropertyChanged = delegate { };
+        CurrentObjectives = new SyncListObjectives();
         Objectives = new List<Objective> {
             new Objective
             {
@@ -43,7 +63,7 @@ public class ObjectiveManager : MonoBehaviour
 
     public void Add(Objective objective)
     {
-        if(!IsCurrentObjective(objective) && objective.Status == ObjectiveStateEnum.BACKLOG)
+        if (!IsCurrentObjective(objective) && objective.Status == ObjectiveStateEnum.BACKLOG)
         {
             objective.Status = ObjectiveStateEnum.PROGRESS;
             CurrentObjectives.Add(objective);
@@ -80,19 +100,25 @@ public class ObjectiveManager : MonoBehaviour
 
     public bool IsCurrentObjective(Objective objective)
     {
-        return CurrentObjectives.Contains(objective);
+        return CurrentObjectives.Where(obj => obj == objective).Any();
     }
 
-    [Command]
-    void Cmd_AddObjective(Objective toDisplay)
+
+    [ClientRpc]
+    public void Rpc_AddObjectiveToServer(Objective objective)
     {
-        manager.Rpc_SetObjective(toDisplay);
+        Add(objective);
     }
 
     [ClientRpc]
-    void Rpc_SetObjective(Objective toDisplay)
+    public void Rpc_CompleteObjectiveToServer(Objective objective)
     {
-
+        Complete(objective);
     }
 
+    [ClientRpc]
+    public void Rpc_FailObjectiveToServer(Objective objective)
+    {
+        Fail(objective);
+    }
 }
