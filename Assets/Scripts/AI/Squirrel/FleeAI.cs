@@ -28,10 +28,14 @@ public class FleeAI : MonoBehaviour
     private FadeMaterial Killer;
     private DogBark Woofer;
 
+    private Animator Animator;
+
     public System.Action WasSpooked;
 
     void Start()
     {
+        Animator = GetComponent<Animator>();
+
         Agent = GetComponent<NavMeshAgent>();
         Killer = GetComponent<FadeMaterial>();
         CurrentPoint = FirstPoint;
@@ -92,6 +96,8 @@ public class FleeAI : MonoBehaviour
                 Woofer.HasBarked += Spook;
             }
         }
+        Animator.SetFloat("Speed", Agent.velocity.magnitude);
+
     }
 
     void FinalFlee(Vector3 SpookyLocation)
