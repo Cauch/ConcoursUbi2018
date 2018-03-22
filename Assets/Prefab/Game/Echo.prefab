@@ -1767,11 +1767,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigidBody: {fileID: 54837018881914724}
   Animator: {fileID: 95566204552694556}
-  MaxSpeed: 15
+  MaxSpeed: 7
   RotationSpeed: 25
   Acceleration: 15
   LandingTime: 0.5
-  MaxHeight: 3
+  MaxHeight: 2
   InAirAcceleration: 10
   FallModifier: 1.5
   LowJumpModifier: 1

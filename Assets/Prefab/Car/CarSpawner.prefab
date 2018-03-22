@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4201562843656452}
   - component: {fileID: 114884311837559388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WayPoint_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4777593686615974}
   - component: {fileID: 114271092829901888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WayPoint_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4515371029070594}
   - component: {fileID: 114031790372765824}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4229277466951048}
   - component: {fileID: 114461750125186770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WayPoint_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 114651782857136450}
   - component: {fileID: 114927436647129840}
   - component: {fileID: 114285641812460478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4712188684928998}
   - component: {fileID: 114159446062382266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WayPoint_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4780788738477490}
   - component: {fileID: 114581824829107188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WayPoint_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4585534258425220}
   - component: {fileID: 114929090265901354}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WayPoint_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4076171626497058}
   - component: {fileID: 114207885993418472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WayPoint_0
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -169,7 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4417507547308034}
   - component: {fileID: 114939589784478826}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WayPoint_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4930518214379742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

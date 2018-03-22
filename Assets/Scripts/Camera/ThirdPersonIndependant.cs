@@ -42,6 +42,8 @@ public class ThirdPersonIndependant : ThirdPerson {
         }
 
         this.transform.position = Player.transform.position + SpringCamera(offset);
+        //this.transform.position = Player.transform.position + offset;// + SpringCamera(offset);
+
         this.transform.LookAt(Player);
     }
 

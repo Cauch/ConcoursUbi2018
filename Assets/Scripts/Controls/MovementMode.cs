@@ -71,29 +71,35 @@ public static class MovementMode {
         cameraRightProjection.y = 0;
         cameraRightProjection.Normalize();
 
+        Vector3 ySpeed = new Vector3(0, player.RigidBody.velocity.y, 0);
+        Vector3 velocity = Vector3.zero;
+        player.RigidBody.velocity = Vector3.zero;
         if (horizontalAxis >= float.Epsilon || horizontalAxis <= -float.Epsilon)
         {
-            player.RigidBody.AddForce(horizontalAxis * cameraRightProjection * acceleration * Time.deltaTime, ForceMode.VelocityChange);
+            velocity += horizontalAxis * cameraRightProjection;
+            //player.RigidBody.AddForce(horizontalAxis * cameraRightProjection * acceleration * Time.deltaTime, ForceMode.VelocityChange);
         }
 
         float verticalAxis = Input.GetAxis("Vertical_Move");
 
         if (verticalAxis >= float.Epsilon || verticalAxis <= -float.Epsilon)
         {
-            player.RigidBody.AddForce(verticalAxis * cameraForwardProjection * acceleration * Time.deltaTime, ForceMode.VelocityChange);
+            velocity += verticalAxis * cameraForwardProjection;
+            //player.RigidBody.AddForce(verticalAxis * cameraForwardProjection * acceleration * Time.deltaTime, ForceMode.VelocityChange);
         }
 
-        Vector3 velocityProjection = player.RigidBody.velocity;
-        if (velocityProjection.magnitude > maxSpeed)
+        Vector3 velocityProjection = velocity;
+        velocityProjection.y = 0;
+
+        if ((Mathf.Abs(verticalAxis) + Mathf.Abs(horizontalAxis)) > 0.1)
         {
             player.RigidBody.velocity = velocityProjection.normalized * maxSpeed;
         }
 
-        velocityProjection.y = 0;
-
+        player.RigidBody.velocity += ySpeed;
         if (velocityProjection != Vector3.zero)
         {
-            player.transform.rotation = Quaternion.Lerp(player.transform.rotation, Quaternion.LookRotation(velocityProjection), Time.deltaTime * 10);
+            player.transform.rotation = Quaternion.LookRotation(velocityProjection);// Quaternion.Lerp(player.transform.rotation, Quaternion.LookRotation(velocityProjection), Time.deltaTime * 10);
         }
     }
 }
