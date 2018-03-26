@@ -10,4 +10,5 @@ public static class GameEssentials {
 
     public static PlayerGirl PlayerGirl;
     public static PlayerDog PlayerDog;
+    public static NPC Npc;
 }
