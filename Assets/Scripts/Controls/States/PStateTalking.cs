@@ -6,13 +6,12 @@ using UnityEngine;
 public class PStateTalking : PlayerState
 {
     private const string AnimatorAction = "Talking";
-    private float DialogueTime;
+    private const float DialogueTime = 1f;
 
     private float _time;
 
-    public PStateTalking(Player player, float dialogueTime = 1f) : base(player)
+    public PStateTalking(Player player) : base(player)
     {
-        DialogueTime = dialogueTime;
     }
 
     public override void InterpretInput()
