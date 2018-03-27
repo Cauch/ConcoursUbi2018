@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
 public class FadeMaterial : NetworkBehaviour {
 
     public float TimeBeforeDestroy;
@@ -11,17 +10,21 @@ public class FadeMaterial : NetworkBehaviour {
 
     private bool IsDieing;
     private float CurrentTime = 0;
-    private MeshRenderer Render;
+    public MeshRenderer Render;
     
     void Start()
     {
-        Render = GetComponent<MeshRenderer>();
     }
 
     [ClientRpc]
     public void Rpc_Kill()
     {
         IsDieing = true;
+        Collider c = GetComponent<Collider>();
+        if(c != null && c.isTrigger)
+        {
+            Destroy(c);
+        }
     }
 	
 	// Update is called once per frame

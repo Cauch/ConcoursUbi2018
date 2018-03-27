@@ -15,9 +15,9 @@ public class TriggerPushable : MonoBehaviour {
     {
         ObjectSync os = other.GetComponentInParent<ObjectSync>();
 
-        if (os != null && os.hasAuthority && (os.CompareTag("Doggo") || os.CompareTag("Fille")))
+        if (os != null && os.hasAuthority && os.CompareTag("Fille"))
         {
-            hintUI.Display(KeyCode.A, "Push the box");
+            hintUI.Display(Controls.A, "Push the box");
         }
     }
 
@@ -29,9 +29,9 @@ public class TriggerPushable : MonoBehaviour {
         {
             Player player = triggerFeet.GetComponentInParent<Player>();
 
-            if (player.State != player.States[StateEnum.CLIMBING])
+            if (player != null && player.State != player.States[StateEnum.CLIMBING])
             {
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonDown("A"))
                 {
                     
                     Vector3 pushDirection = this.transform.parent.position - this.transform.position;
@@ -48,7 +48,7 @@ public class TriggerPushable : MonoBehaviour {
     {
         ObjectSync os = other.GetComponentInParent<ObjectSync>();
 
-        if (os != null && os.hasAuthority && (os.CompareTag("Doggo") || os.CompareTag("Fille")))
+        if (os != null && os.hasAuthority && os.CompareTag("Fille"))
         {
             hintUI.Hide();
         }
