@@ -39,8 +39,6 @@ public class DogBark : NetworkBehaviour {
         if (!hasAuthority)
             return;
 
-        _time += Time.deltaTime;
-
         if (Time.time > Cooldown + _time)
         {
             if (Input.GetButtonDown("Y") && GameEssentials.PlayerDog.IsState(StateEnum.GROUNDED))
