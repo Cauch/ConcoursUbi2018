@@ -2,21 +2,18 @@
 using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour {
-    public int DialogueId;
-    public Dialogue Dialogue;
-    private DialogueManager _dialogueManager;
-
-    private void Start()
-    {
-        _dialogueManager = GameEssentials.DialogueManager;
-        Dialogue = _dialogueManager.Dialogues.Where(dialogue => dialogue.Id == DialogueId).First();
-    }
+    public List<int> DialoguesId;
 
     private void OnTriggerEnter(Collider other)
     {
         if (GameEssentials.IsGirl(other))
         {
-            GameEssentials.DialogueSync.Cmd_ChangeDialogueToServer(Dialogue);
+
+            foreach (int i in DialoguesId)
+            {
+                GameEssentials.DialogueSync.Cmd_ChangeDialogueToServer(GameEssentials.DialogueManager.Dialogues.Where(d => d.Id == i).First());
+            }
+
             Destroy(this);
         }
     }
