@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class DialogueTrigger : MonoBehaviour {
     public int DialogueId;
@@ -17,8 +14,7 @@ public class DialogueTrigger : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        NetworkBehaviour networkBehaviour = other.GetComponentInParent<NetworkBehaviour>();
-        if (networkBehaviour && networkBehaviour.isLocalPlayer && other.gameObject.GetComponent<TriggerFeet>())
+        if (GameEssentials.IsGirl(other))
         {
             GameEssentials.DialogueSync.Cmd_ChangeDialogueToServer(Dialogue);
             Destroy(this);
