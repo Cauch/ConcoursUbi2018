@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PStateReading : PlayerState {
-    private const string AnimatorAction = "Talking";
+    private const string AnimatorAction = "Reading";
     private const string ClipName = "Girl_Reading";
-
-    private const float ReadingTime = 1f;
 
     private float _time;
     private float _clipLength;
@@ -21,7 +19,6 @@ public class PStateReading : PlayerState {
                 break;
             }
         }
-        
     }
 
     public override void InterpretInput()

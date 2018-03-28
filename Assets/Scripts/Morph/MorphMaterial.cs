@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MorphMaterial : MonoBehaviour {
-    public Material M0;
-    public Material M1;
-
     public float MorphTime = 1f;
 
     public bool IsActive;
-
-    public GameObject go;
 
     private Renderer _renderer;
 
@@ -18,7 +13,7 @@ public class MorphMaterial : MonoBehaviour {
 
     private void Start()
     {
-        _renderer = go.GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
     }
 
     private void FixedUpdate()
@@ -27,12 +22,10 @@ public class MorphMaterial : MonoBehaviour {
         {
             _time += Time.deltaTime;
 
-            _renderer.material.Lerp(M0, M1, Mathf.Clamp(_time / MorphTime, 0f, 1f));
+            _renderer.material.SetFloat("_Value", Mathf.Clamp(_time / MorphTime, 0f, 1f));
 
             if (_time > MorphTime)
             {
-                _renderer.material = M1;
-
                 Destroy(this);
             }
         }

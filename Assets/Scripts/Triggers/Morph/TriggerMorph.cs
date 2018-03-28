@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TriggerRead : MonoBehaviour {
+public class TriggerRead : NetworkBehaviour {
     public List<GameObject> MorphingObjects;
     public HintUI HintUI;
 
