@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerGirl : Player {
-    public float MaxMovementSpeed = 25f;
     public float MovementSpeed = 10f;
     public float RotationSpeed = 45f;
     public float Acceleration = 30f;
@@ -14,8 +13,7 @@ public class PlayerGirl : Player {
 
     public bool shaderActivated = true;
 
-    private ObjectSync doggoOS;
-    public Fear fear;
+    private GameObject doggo;
 
     new private void Awake()
     {
@@ -31,8 +29,7 @@ public class PlayerGirl : Player {
             { StateEnum.GETTING_OFF_LADDER, new PStateScriptedLadder(this) },
             { StateEnum.PUSHING, new PStatePushing(this, PushingMovementSpeed) },
             { StateEnum.GRABBING, new PStateGrabbing(this) },
-            { StateEnum.TALKING, new PStateTalking(this) },
-            { StateEnum.READING, new PStateReading(this) },
+            { StateEnum.TALKING, new PStateTalking(this) }
         };
     }
 
@@ -42,68 +39,20 @@ public class PlayerGirl : Player {
 
         if(Camera != null)
         {
-            if (doggoOS == null)
+            if (doggo == null)
             {
-                GameObject OB = GameObject.FindGameObjectWithTag("Doggo");
-                if (OB != null)
-                    doggoOS = OB.GetComponent<ObjectSync>();
+                doggo = GameObject.FindGameObjectWithTag("Doggo");
             }
             else
             {
-                doggoOS.Rpc_SetScaredEffectColor(Camera.backgroundColor);
+                doggo.GetComponent<ObjectSync>().Rpc_SetScaredEffectColor(Camera.backgroundColor);
             }
         }
-
-        AdjustMovementSpeed();
     }
 
     public override void SetCamera(Camera camera)
     {
         Camera = camera;
         ((PStateGrounded)States[StateEnum.GROUNDED]).SetCamera(camera);
-    }
-
-    public void AdjustMovementSpeed()
-    {
-        float ratio = 0;
-        switch (fear.fearState)
-        {
-            case Fear.FearState.Calm:
-                ratio = 1f;
-                break;
-
-            case Fear.FearState.Anxious:
-                ratio = .75f;
-                break;
-
-            case Fear.FearState.Stress:
-                ratio = .5f;
-                break;
-
-            case Fear.FearState.Panic:
-                ratio = .25f;
-                break;
-
-            case Fear.FearState.NearDeath:
-                ratio = .1f;
-                break;
-        }
-
-        if (Camera != null)
-        {
-            LerpColor lc = Camera.GetComponent<LerpColor>();
-            if (ratio <= 0.5f && lc.GetCurrentEmotion() == Emotion.Positive)
-            {
-                lc.SetEmotions(Emotion.Negative);
-            }
-            else if (ratio > 0.5f && lc.GetCurrentEmotion() == Emotion.Negative)
-            {
-                lc.SetEmotions(Emotion.Positive);
-            }
-        }
-
-
-        PStateGrounded state = States[StateEnum.GROUNDED] as PStateGrounded;
-        state.SetMovementSpeed(MaxMovementSpeed * ratio);
     }
 }
