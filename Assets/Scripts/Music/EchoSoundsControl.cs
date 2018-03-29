@@ -9,11 +9,11 @@ public class EchoSoundsControl : CharacterSoundsControl {
 
 	public void BarkJoyfully()
 	{
-		m_AudioSource [1].PlayOneShot (JoyfulBarkClip);
+		m_AudioSource [2].PlayOneShot (JoyfulBarkClip);
 	}
 
 	public void BarkAggressively()
 	{
-		m_AudioSource [1].PlayOneShot (AggressiveBarkClip);
+		m_AudioSource [2].PlayOneShot (AggressiveBarkClip);
 	}
 }

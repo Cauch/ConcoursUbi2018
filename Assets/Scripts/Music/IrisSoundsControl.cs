@@ -15,17 +15,23 @@ public class IrisSoundsControl : CharacterSoundsControl {
 
 		if (!m_IsPushPlaying) {
 			// Iris canne sound
-			m_AudioSource [1].PlayOneShot (GetRandomClip (CanneClips));
+			m_AudioSource [2].PlayOneShot (GetRandomClip (CanneClips));
 		}
-	}
+    }
 
-	public void StartPush()
+    public override void Talk()
+    {
+        m_AudioSource[1].pitch = 1.5f;
+        base.Talk();
+    }
+
+    public void StartPush()
 	{
 		if (m_AudioSource [1].clip != PushClip || !m_IsPushPlaying) {
 			m_IsPushPlaying = true;
-			m_AudioSource [1].loop = true;
-			m_AudioSource [1].clip = PushClip;
-			m_AudioSource [1].Play ();
+			m_AudioSource [2].loop = true;
+			m_AudioSource [2].clip = PushClip;
+			m_AudioSource [2].Play ();
 		}
 	}
 
@@ -33,8 +39,8 @@ public class IrisSoundsControl : CharacterSoundsControl {
 	{
 		if (m_IsPushPlaying) {
 			m_IsPushPlaying = false;
-			m_AudioSource [1].Stop ();
-			m_AudioSource [1].loop = false;
+			m_AudioSource [2].Stop ();
+			m_AudioSource [2].loop = false;
 		}
 	}
 }
