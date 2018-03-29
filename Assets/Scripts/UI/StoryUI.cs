@@ -64,11 +64,24 @@ public class StoryUI : MonoBehaviour {
 
                 characterName.text = m.name;
                 dialog.text = m.content;
-
                 if (!StoryPanel.activeSelf)
                 {
                     StoryPanel.SetActive(true);
                 }
+
+                // add talking sound
+
+                if (m.name == "Echo")
+                {
+                    EchoSoundsControl control = GameEssentials.PlayerDog.gameObject.GetComponent<EchoSoundsControl>();
+                    control.Talk();
+                }
+                else if (m.name == "Iris")
+                {
+                    IrisSoundsControl control = GameEssentials.PlayerGirl.gameObject.GetComponent<IrisSoundsControl>();
+                    control.Talk();
+                }
+
             }
             else if(currentTime > duration)
             {

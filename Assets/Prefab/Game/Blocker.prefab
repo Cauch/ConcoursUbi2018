@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 114766370769130836}
   - component: {fileID: 114826163572010880}
   - component: {fileID: 82794905364800304}
+  - component: {fileID: 82739276472489744}
   m_Layer: 0
   m_Name: Blocker
   m_TagString: AI
@@ -2149,6 +2150,87 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82739276472489744
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1704704836532306}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243789518315457314, guid: fb197bd67a7bd4b17b6341c2c83dfeea,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &82794905364800304
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2373,6 +2455,10 @@ MonoBehaviour:
   FootstepsClips:
   - {fileID: 8300000, guid: 018bd370e1a9e47458918242b29859b8, type: 3}
   - {fileID: 8300000, guid: 34401fec42abb498bbe07b71c57db94a, type: 3}
+  TalkingClips:
+  - {fileID: 8300000, guid: 9f1909fc3e7d5402380f4f897d727db6, type: 3}
+  - {fileID: 8300000, guid: a80c7b7453d7546688c0e16fb645dd5d, type: 3}
+  - {fileID: 8300000, guid: cb194b1d194ec457b90ff1a4bd1aa425, type: 3}
 --- !u!137 &137533309419805634
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
